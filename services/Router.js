@@ -1,14 +1,17 @@
 const Router = {
-  init: () => {
+  init: function () {
     document.querySelectorAll("a.navlink").forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault()
-        Router.go(e.target.getAttribute("href"))
+        this.go(e.target.getAttribute("href"))
       })
     })
-    Router.go(location.pathname)
+    window.addEventListener("popstate", e => {
+      this.go(e.state.route, false)
+    })
+    this.go(location.pathname)
   },
-  go: (route, addToHistory = true) => {
+  go: function (route, addToHistory = true) {
     if (addToHistory) {
       history.pushState({ route }, null, route)
     }
