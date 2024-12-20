@@ -3,31 +3,33 @@ const Router = {
     document.querySelectorAll("a.navlink").forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault()
-        this.go(e.target.getAttribute("href"))
+        Router.go(e.target.getAttribute("href"))
       })
     })
     window.addEventListener("popstate", e => {
-      this.go(e.state.route, false)
+      Router.go(e.state.route, false)
     })
-    this.go(location.pathname)
+    Router.go(location.pathname)
   },
-  go: function (route, addToHistory = true) {
+  go: (route, addToHistory = true) => {
     if (addToHistory) {
       history.pushState({ route }, null, route)
     }
     let pageElement = null
     switch (route) {
       case "/":
-        pageElement = document.createElement("h1")
-        pageElement.textContent = "Main page"
+        pageElement = document.createElement("menu-page")
         break
       case "/order":
-        pageElement = document.createElement("h1")
+        pageElement = document.createElement("order-page")
         pageElement.textContent = "Order page"
         break
       default:
-        pageElement = document.createElement("h1")
-        pageElement.textContent = "404"
+        if (route.startsWith("/product-")) {
+          pageElement = document.createElement("details-page")
+          const paramId = route.substring(route.lastIndexOf("-") + 1)
+          pageElement.dataset.productId = paramId
+        }
         break
     }
     const main = document.querySelector("main")
