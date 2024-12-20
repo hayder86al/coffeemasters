@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   app.router.init()
 })
 
-window.addEventListener("appcartchange", event => {
+window.addEventListener("appcartchange", () => {
   const badge = document.getElementById("badge")
   const quantity = app.store.cart.reduce((acc, item) => acc + item.quantity, 0)
   badge.textContent = quantity

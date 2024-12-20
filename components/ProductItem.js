@@ -1,4 +1,4 @@
-import { addToCart } from "../services/Order"
+import { addToCart } from "../services/Order.js"
 export class ProductItem extends HTMLElement {
   constructor() {
     super()

@@ -6,7 +6,7 @@ export async function addToCart(id) {
     productInCart => productInCart.product.id == id
   )
   if (result) {
-    app.store.cart.map(p =>
+    app.store.cart = app.store.cart.map(p =>
       p.product.id == id ? { ...p, quantity: p.quantity + 1 } : p
     )
   } else {
