@@ -32,6 +32,10 @@ const Router = {
         }
         break
     }
+    if (!pageElement) {
+      document.querySelector("main").innerHTML = "Oops! 404 Not Found!"
+    }
+
     document.querySelector("main").appendChild(pageElement)
     const main = document.querySelector("main")
     main.innerHTML = null

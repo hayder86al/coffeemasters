@@ -14,7 +14,6 @@ export class ProductItem extends HTMLElement {
     this.querySelector("p.price").textContent = `$${product.price.toFixed(2)}`
     this.querySelector("img").src = `/data/images/${product.image}`
     this.querySelector("a").addEventListener("click", e => {
-      console.log(e.target.tagName)
       e.preventDefault()
       if (e.target.tagName.toLowerCase() == "button") {
         addToCart(product.id)
