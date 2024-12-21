@@ -2,9 +2,6 @@ export class MenuPage extends HTMLElement {
   constructor() {
     super()
     this.root = this.attachShadow({ mode: "open" })
-    const template = document.getElementById("menu-page-template")
-    const content = template.content.cloneNode(true)
-    this.root.appendChild(content)
     const styles = document.createElement("style")
     this.root.appendChild(styles)
     async function loadCss() {
@@ -13,9 +10,17 @@ export class MenuPage extends HTMLElement {
       styles.textContent = text
     }
     loadCss()
+  }
+
+  connectedCallback() {
+    const template = document.getElementById("menu-page-template")
+    const content = template.content.cloneNode(true)
+    this.root.appendChild(content)
+
     window.addEventListener("appmenuchange", () => {
       this.render()
     })
+    this.render()
   }
 
   render() {

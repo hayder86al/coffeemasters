@@ -32,6 +32,7 @@ const Router = {
         }
         break
     }
+    document.querySelector("main").appendChild(pageElement)
     const main = document.querySelector("main")
     main.innerHTML = null
     main.appendChild(pageElement)
